@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.core.fromnumeric import std
 from scipy.linalg import solve
 from scipy.stats import multivariate_normal
 import matplotlib.pyplot as plt
@@ -105,11 +106,15 @@ xpreds_runs = np.zeros((runs, max_t, n))
 for i in range(runs):
     xpreds_runs[i] = kf(A, B, C, Q, R, xs, us, xbar_0, Pbar_0, max_t)
 
+print("a----", xpreds_runs.shape)
 # Compute mean values
 xpreds = np.mean(xpreds_runs, axis = 0)
 errors = [np.linalg.norm(xs[t] - xpreds_runs[:, t], axis = 1) ** 2 for t in ts]
 mean_error = np.mean(errors, axis = 1)
 std_error = np.std(errors, axis = 1) / np.sqrt(runs)
+
+print("w----", xpreds.shape)
+print("y----", len(errors), errors[0].shape)
 
 # Visualize predictions vs real values
 fig, axs = plt.subplots(2, 2)
