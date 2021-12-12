@@ -1,0 +1,512 @@
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+df <- df[,c('D', 'Y', 'X')]
+df
+df <- df[,c('D', 'X', 'Y')]
+df
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+df <- df[,c('D', 'Y', 'X')]
+df
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+ajuste <- with(df, locpoly(X, Y, degree=1), bandwith=dpill(X, Y))
+ajuste
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwith=dpill(X, Y)))
+ajuste
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwith=dpill(X, Y)))
+ajuste
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+#ajuste <- with(df, locpoly(X, Y, degree=1, bandwith=dpill(X, Y)))
+#ajuste
+ajuste1 <- with(df, locpoly(X, Y, degree = 1, bandwidth = dpill(X, Y), gridsize = 107))
+ajuste1
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste local
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y)))
+ajuste
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y)))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+gglot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='teal', size=1.1) +
+geom_label(aes(x=1, y=4, label='Localmente lineal'), color='teal') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=4, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y)))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='teal', size=1.1) +
+geom_label(aes(x=1, y=4, label='Localmente lineal'), color='teal') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=4, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='teal', size=1.1) +
+geom_label(aes(x=1, y=4, label='Localmente lineal'), color='teal') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=4, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=1, y=4, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=4, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=40, y=4, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=48, y=4.5, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=4, y=40, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=4.5, y=45, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=4, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=4.5, y=85, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=1, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=1, y=85, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=1.2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=1.2, y=85, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=1.4, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=1.4, y=85, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='orange')
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='orange')+
+theme(axis.line = element_line(colour = "black"),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank(),
+panel.background = element_blank())
+df
+library(KernSmooth)
+library(dplyr)
+library(ggplot2)
+#read file
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header = FALSE, skip = 1,col.names=c("-","D","X","Y"),
+colClasses=c("numeric","numeric","numeric","numeric"),sep=" ")
+df <- df[,c("D","X","Y")]
+#Locally linear
+ajuste1 <- with(df, locpoly(X, Y, degree = 1, bandwidth = dpill(X, Y), gridsize = 107))
+#plotting
+df %>%
+mutate(curva1 = ajuste1$y) %>%
+ggplot() +
+geom_point(aes(X,Y)) +
+geom_line(aes(ajuste1$x, curva1), color="blue", size = 1.1) +
+geom_label( aes(x=45, y=4.5, label="Locally Linear"), color="blue") +
+geom_smooth(mapping = aes(X,Y), method = 'loess', se = FALSE, span = 0.25, method.args = list(degree=0), col = 'red')+ #Nadaraya-Watson estimator
+geom_label( aes(x=46.5, y=4.2, label="Nadaraya - Watson"), color="red")
+df
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+# plot de ambas
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+ggtitle('Estimador localmente lineal vs. Nadaraya-Watson') +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='orange')+
+theme(axis.line = element_line(colour = "black"),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank(),
+panel.background = element_blank())
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=1, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+# plot de ambas
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+ggtitle('Estimador localmente lineal vs. Nadaraya-Watson') +
+theme(plot.title = element_text(hjust = 0.5)) +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='orange')+
+theme(axis.line = element_line(colour = "black"),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank(),
+panel.background = element_blank())
+View(ajuste1)
+View(ajuste1)
+View(ajuste1)
+View(ajuste1)
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=2, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+# plot de ambas
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+ggtitle('Estimador localmente lineal vs. Nadaraya-Watson') +
+theme(plot.title = element_text(hjust = 0.5)) +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='orange') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='orange')+
+theme(axis.line = element_line(colour = "black"),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank(),
+panel.background = element_blank())
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=2, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+# plot de ambas
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+ggtitle('Estimador localmente lineal vs. Nadaraya-Watson') +
+theme(plot.title = element_text(hjust = 0.5)) +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='darkorange3') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='darkorange3')+
+theme(axis.line = element_line(colour = "black"),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank(),
+panel.background = element_blank())
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=2, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+# plot de ambas
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+ggtitle('Estimador localmente lineal vs. Nadaraya-Watson') +
+theme(plot.title = element_text(hjust = 0.5)) +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='darkorange2') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='darkorange2')+
+theme(axis.line = element_line(colour = "black"),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank(),
+panel.background = element_blank())
+library(ggplot2)
+library(dplyr)
+library(KernSmooth)
+# lectura del fichero
+df <- read.table("https://matematicas.uam.es/~joser.berrendero/datos/Datos-geyser.txt",
+header=FALSE, skip=1, sep=' ', col.names=c(' ', 'D', 'Y', 'X'),
+colClasses=c('numeric', 'numeric', 'numeric', 'numeric'))
+# guardado en dataframe
+df <- df[,c('D', 'Y', 'X')]
+# ajuste localmente lineal
+ajuste <- with(df, locpoly(X, Y, degree=2, bandwidth=dpill(X, Y), gridsize=107))
+ajuste
+# plot de ambas
+df %>%
+mutate(curva=ajuste$y) %>%
+ggplot() +
+ggtitle('Estimador localmente lineal vs. Nadaraya-Watson') +
+theme(plot.title = element_text(hjust = 0.5)) +
+geom_point(aes(X, Y)) +
+geom_line(aes(ajuste$x, curva), color='cadetblue', size=1.1) +
+geom_label(aes(x=2, y=80, label='Localmente lineal'), color='cadetblue') +
+geom_smooth(mapping=aes(X, Y), method='loess', se=FALSE, span=0.25, method.args=list(degree=0), col='darkorange1') +
+geom_label(aes(x=2, y=85, label='Nadayara-Watson'), color='darkorange2')+
+theme(axis.line = element_line(colour = "black"),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank(),
+panel.background = element_blank())
