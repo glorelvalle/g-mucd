@@ -136,3 +136,7 @@ __MACOSX/*
 ti/DatosSinapsisArtificial.zip
 ti/DatosSinapsisArtificial/*.zip
 ti/DatosSinapsisArtificial/*.txt
+.Rproj.user
+
+# PDFs largos
+pst/Libros/
