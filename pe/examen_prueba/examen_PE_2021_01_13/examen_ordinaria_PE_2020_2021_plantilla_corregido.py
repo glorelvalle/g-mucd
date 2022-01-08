@@ -76,21 +76,28 @@ def simulate_continuous_time_Markov_Chain(
     >>> ax.set_xlabel('time')
     >>> _ = ax.set_title('Simulation of a continuous-time Markov chain')
     """
+    # Initial values
     arrival_times = [[t0] for _ in range(M)]
     trajectories = [[state_0] for _ in range(M)]
 
+    # Computation of each trajectorie
     for tr in range(M):
+        # Initial values
         t, s = t0, state_0
 
-        while(1):
-            t += stats.expon.rvs(scale=1/lambda_rates[s])
+        # Save current beta value for exponential distribution scale parametrization
+        beta = 1./lambda_rates[s]
 
-            if t > t1:
-                break
-            
+        # Simulation with time limit
+        while(t < t1):
+            # Compute next arrival time
+            t += stats.expon.rvs(scale=beta)
+
+            # Compute next state and selecting cumsum(P[state]) ≥ random number from uniform [0,1]
+            s = np.where(np.cumsum(transition_matrix[s]) >= np.random.uniform(0.,1.))[0][0]
+
+            # Store next state and arrival time
             arrival_times[tr].append(t)
-
-            s = np.where(np.cumsum(transition_matrix[s]) >= stats.uniform.rvs())[0][0]
             trajectories[tr].append(s)
 
     return arrival_times, trajectories
