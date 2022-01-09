@@ -88,6 +88,8 @@ def simulate_continuous_time_Markov_Chain(
         # Save current beta value for exponential distribution scale parametrization
         beta = 1./lambda_rates[s]
 
+        t = stats.expon.rvs(scale=beta)
+
         # Simulation with time limit
         while(t < t1):
             # Compute next arrival time
@@ -127,7 +129,7 @@ def plot_ctmc_simulation(arrival_times_CTMC, trajectories_CTMC, M):
     fig, ax = plt.subplots(M, 1, figsize=(14, 16))
     plt.suptitle(f'Simulation of {M} trajectories for a CTMC', size=18)
     plt.xlabel('t')
-    # Select M colors por each trajectory from a determined spectrum
+    # Select M colors for each trajectory from a determined spectrum
     colors = sns.dark_palette(sns.color_palette("dark:cornflowerblue_r")[0], M, reverse=True)
     # Plot for each trajectory
     for m in range(M):
