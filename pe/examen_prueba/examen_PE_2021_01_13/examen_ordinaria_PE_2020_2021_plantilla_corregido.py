@@ -5,7 +5,7 @@ import BM_simulators as BM
 from scipy.integrate import quad
 from scipy import stats
 from typing import List, Set, Dict, Tuple, Optional
-
+import seaborn as sns
 
 
 def simulate_continuous_time_Markov_Chain(
@@ -43,7 +43,7 @@ def simulate_continuous_time_Markov_Chain(
        Each sublist is a the sequence of arrival times in a trajectory
        The first of element of each sublist is t0.
     
-    tajectories : list
+    trajectories : list
         List of M sublists.
         Sublist m is trajectory compose of a sequence of states
         of length len(arrival_times[m]).
@@ -102,6 +102,39 @@ def simulate_continuous_time_Markov_Chain(
 
     return arrival_times, trajectories
 
+def plot_ctmc_simulation(arrival_times_CTMC, trajectories_CTMC, M):
+    """ Plots a CTMC simulation for M trajectories
+
+    Parameters
+    -------
+
+    arrival_times : list
+       List of M sublists with the arrival times.
+       Each sublist is a the sequence of arrival times in a trajectory
+       The first of element of each sublist is t0.
+    
+    trajectories : list
+        List of M sublists.
+        Sublist m is trajectory compose of a sequence of states
+        of length len(arrival_times[m]).
+        All trajectories start from state_0.
+    
+    M : int
+        Number of trajectories
+    """
+    # Subplots parameters
+    fig, ax = plt.subplots(M, 1, figsize=(14, 16))
+    plt.suptitle(f'Simulation of {M} trajectories for a CTMC', size=18)
+    plt.xlabel('t')
+    # Select M colors por each trajectorie from a determined spectrum
+    colors = sns.dark_palette(sns.color_palette("dark:cornflowerblue_r")[0], M, reverse=True)
+    # Plot for each trajectorie
+    for m in range(M):
+        ax[m].set_title('M {}'.format(m+1), size=16)
+        ax[m].set_ylabel('state')
+        ax[m].step(arrival_times_CTMC[m], trajectories_CTMC[m], c=colors[m])
+    # Plot padding
+    fig.tight_layout(pad=2.)
 
 def price_EU_call(
     S0: float, 
