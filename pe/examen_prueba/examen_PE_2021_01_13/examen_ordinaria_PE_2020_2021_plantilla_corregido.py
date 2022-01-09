@@ -86,15 +86,18 @@ def simulate_continuous_time_Markov_Chain(
         t, s = t0, state_0
 
         # Save current beta value for exponential distribution scale parametrization
-        beta = 1./lambda_rates[s]
+        #beta = 1./lambda_rates[s]
 
-        t = stats.expon.rvs(scale=beta)
+        #t = stats.expon.rvs(scale=beta)
 
         # Simulation with time limit
-        while(t < t1):
+        while(True):
             # Compute next arrival time
-            t += stats.expon.rvs(scale=beta)
+            t += stats.expon.rvs(scale=1./lambda_rates[s])
 
+            if(t >= t1):
+                break
+            
             # Compute next state and selecting cumsum(P[state]) ≥ random number from uniform [0,1]
             s = np.where(np.cumsum(transition_matrix[s]) >= np.random.uniform(0.,1.))[0][0]
 
