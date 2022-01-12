@@ -82,21 +82,20 @@ def simulate_continuous_time_Markov_Chain(
 
     # Computation of each trajectory
     for tr in range(M):
+        
         # Initial values
         t, s = t0, state_0
 
-        # Save current beta value for exponential distribution scale parametrization
-        #beta = 1./lambda_rates[s]
-
-        #t = stats.expon.rvs(scale=beta)
-
         # Simulation with time limit
         while(True):
-            # Compute next arrival time
-            t += stats.expon.rvs(scale=1./lambda_rates[s])
+            # Save current beta value for exponential distribution scale parametrization
+            beta = 1./lambda_rates[s]
 
-            if(t >= t1):
-                break
+            # Compute next arrival time
+            t += stats.expon.rvs(scale=beta)
+
+            # Check time limit
+            if(t >= t1): break
             
             # Compute next state and selecting cumsum(P[state]) ≥ random number from uniform [0,1]
             s = np.where(np.cumsum(transition_matrix[s]) >= np.random.uniform(0.,1.))[0][0]
