@@ -82,7 +82,7 @@ def simulate_continuous_time_Markov_Chain(
 
     # Computation of each trajectory
     for tr in range(M):
-        
+
         # Initial values
         t, s = t0, state_0
 
@@ -131,13 +131,16 @@ def plot_ctmc_simulation(arrival_times_CTMC, trajectories_CTMC, M):
     fig, ax = plt.subplots(M, 1, figsize=(14, 16))
     plt.suptitle(f'Simulation of {M} trajectories for a CTMC', size=18)
     plt.xlabel('t')
+    
     # Select M colors for each trajectory from a determined spectrum
     colors = sns.dark_palette(sns.color_palette("dark:cornflowerblue_r")[0], M, reverse=True)
+    
     # Plot for each trajectory
     for m in range(M):
         ax[m].set_title('M {}'.format(m+1), size=16)
         ax[m].set_ylabel('state')
         ax[m].step(arrival_times_CTMC[m], trajectories_CTMC[m], c=colors[m])
+        
     # Plot padding
     fig.tight_layout(pad=2.)
 
