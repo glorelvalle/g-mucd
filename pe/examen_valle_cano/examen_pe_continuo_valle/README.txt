@@ -1,0 +1,2 @@
+Los ejercicios resueltos para el examen se encuentran en el Jupyter Notebook. No se entrega pdf aparte.
+Se adjuntan ficheros .py de otras prácticas que han sido de utilidad y la plantilla del examen del año pasado.

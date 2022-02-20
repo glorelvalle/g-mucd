@@ -5,7 +5,7 @@ import BM_simulators as BM
 from scipy.integrate import quad
 from scipy import stats
 from typing import List, Set, Dict, Tuple, Optional
-
+import seaborn as sns
 
 
 def simulate_continuous_time_Markov_Chain(
@@ -43,7 +43,7 @@ def simulate_continuous_time_Markov_Chain(
        Each sublist is a the sequence of arrival times in a trajectory
        The first of element of each sublist is t0.
     
-    tajectories : list
+    trajectories : list
         List of M sublists.
         Sublist m is trajectory compose of a sequence of states
         of length len(arrival_times[m]).
@@ -57,25 +57,92 @@ def simulate_continuous_time_Markov_Chain(
     >>> transition_matrix = [[  0,   1, 0], 
     ...                      [  0,   0, 1],
     ...                      [1/2, 1/2, 0]]
+    >>> lambda_rates = [2, 1, 3]
+    >>> t0 = 0.0
+    >>> t1 = 100.0
     >>> state_0 = 0
     # Simulate and plot a trajectory.
     >>> M = 1 # Number of simulations
     >>> N = 100 # Time steps per simulation
-    >>> times, trajectories = pe.simulate_discrete_time_Markov_Chain(transition_matrix, 
-    ...                                                              state_0, 
-    ...                                                              M, 
-    ...                                                              N)
+    >>> arrival_times_CTMC, trajectories_CTMC = (
+    ...     pe.simulate_continuous_time_Markov_Chain(
+    ...     transition_matrix, lambda_rates, 
+    ...     state_0, M, t0, t1))
     >>> fig, ax = plt.subplots(1, 1, figsize=(10,5), num=1)
-    >>> ax.step(times, 
-    ...         trajectories[0],
+    >>> ax.step(arrival_times_CTMC[0], 
+    ...         trajectories_CTMC[0],
     ...         where='post')
-    >>> ax.set_ylabel('State')
-    >>> ax.set_xlabel('Time')
-    >>> _ = ax.set_title('Simulation of a discrete-time Markov chain')
+    >>> ax.set_ylabel('state')
+    >>> ax.set_xlabel('time')
+    >>> _ = ax.set_title('Simulation of a continuous-time Markov chain')
     """
-    
-    return arrival_times, tajectories
+    # Initial values
+    arrival_times = [[t0] for _ in range(M)]
+    trajectories = [[state_0] for _ in range(M)]
 
+    # Computation of each trajectory
+    for tr in range(M):
+
+        # Initial values
+        t, s = t0, state_0
+
+        # Simulation with time limit
+        while(True):
+            # Save current beta value for exponential distribution scale parametrization
+            beta = 1./lambda_rates[s]
+
+            # Compute next arrival time
+            t += stats.expon.rvs(scale=beta)
+
+            # Check time limit
+            if(t >= t1): break
+            
+            # Compute next state and selecting cumsum(P[state]) ≥ random number from uniform [0,1]
+            s = np.where(np.cumsum(transition_matrix[s]) >= np.random.uniform(0.,1.))[0][0]
+
+            # Store next state and arrival time
+            arrival_times[tr].append(t)
+            trajectories[tr].append(s)
+
+    return arrival_times, trajectories
+
+def plot_ctmc_simulation(arrival_times_CTMC, trajectories_CTMC, M):
+    """ Plots a CTMC simulation for M trajectories
+
+    Parameters
+    -------
+
+    arrival_times : list
+       List of M sublists with the arrival times.
+       Each sublist is a the sequence of arrival times in a trajectory
+       The first of element of each sublist is t0.
+    
+    trajectories : list
+        List of M sublists.
+        Sublist m is trajectory compose of a sequence of states
+        of length len(arrival_times[m]).
+        All trajectories start from state_0.
+    
+    M : int
+        Number of trajectories
+
+    """
+    # Subplots parameters
+    fig, ax = plt.subplots(M, 1, figsize=(14, 16))
+    plt.suptitle(f'Simulation of {M} trajectories for a CTMC', size=18)
+    plt.xlabel('t')
+    
+    # Select M colors for each trajectory from a determined spectrum
+    colors = sns.dark_palette(sns.color_palette("dark:cornflowerblue_r")[0], M, reverse=True)
+    
+    # Plot for each trajectory
+    for m in range(M):
+        ax[m].set_title('M {}'.format(m+1), size=16)
+        ax[m].set_ylabel('state')
+        ax[m].step(arrival_times_CTMC[m], trajectories_CTMC[m], c=colors[m])
+        
+    # Plot padding
+    fig.tight_layout(pad=2.)
 
 def price_EU_call(
     S0: float, 
