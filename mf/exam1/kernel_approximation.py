@@ -200,9 +200,22 @@ class RandomFeaturesSamplerExp(RandomFeaturesSampler):
         """Q6. Write code to generate random Fourier Features
         corresponding to the exponential kernel in D dimensions.
         """
-        #  <YOUR CODE HERE>
+
+        D = np.shape(X)[1]
+
+        self.w = self.sample_from_exp(D, self.n_features_sampled)
 
         return self
+
+    def sample_from_exp(self, D: int, n: int) -> np.ndarray:
+
+        kernel_exp_inv_cdf = lambda gamma, p: 1 / gamma * np.tan(np.pi * (p - 0.5))
+
+        rng = np.random.default_rng()
+        u = rng.uniform(size=(n, D))
+        X = kernel_exp_inv_cdf(self.length_scale_kernel, u)
+
+        return X
 
 
 class NystroemFeaturesSampler(BaseEstimator, TransformerMixin):
