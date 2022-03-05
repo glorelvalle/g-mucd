@@ -1,0 +1,345 @@
+\documentclass[12pt]{scrartcl}
+\title{ELEC 340 Assignment 3}
+\nonstopmode
+%\usepackage[utf-8]{inputenc}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx} % Required for including pictures
+\usepackage[figurename=Figure]{caption}
+\usepackage{float}    % For tables and other floats
+\usepackage{verbatim} % For comments and other
+\usepackage{amsmath}  % For math
+\usepackage{amssymb}  % For more math
+\usepackage{fullpage} % Set margins and place page numbers at bottom center
+\usepackage{paralist} % paragraph spacing
+\usepackage{listings} % For source code
+\usepackage{subfig}   % For subfigures
+%\usepackage{physics}  % for simplified dv, and 
+\usepackage{enumitem} % useful for itemization
+\usepackage{siunitx}  % standardization of si units
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow} % para las tablas
+\usepackage{enumitem}
+	
+\usepackage{color, colortbl}
+\usepackage[margin=0.8in]{geometry} % for PAPER & MARGIN
+\usepackage[many]{tcolorbox}    	% for COLORED BOXES (tikz and xcolor included)
+\usepackage{setspace}               % for LINE SPACING
+\usepackage{multicol}               % for MULTICOLUMNS
+
+%\setlength\columnsep{0.25in} % setting length of column separator
+\definecolor{main}{HTML}{5989cf}    % setting main color to be used
+\definecolor{sub}{HTML}{cde4ff}     % setting sub color to be used
+
+\definecolor{commentgreen}{RGB}{2,112,10}
+\definecolor{highlightblue}{RGB}{31,119,220}
+\definecolor{eminence}{RGB}{108,48,130}
+\definecolor{weborange}{RGB}{255,129,0}
+\definecolor{frenchplum}{RGB}{129,20,83}
+\definecolor{darkpink}{RGB}{229,4,101}
+\definecolor{gray}{gray}{0.9}
+
+\tcbset{
+    sharp corners,
+    colback = white,
+    before skip = 0.2cm,    % add extra space before the box
+    after skip = 0.5cm      % add extra space after the box
+}                           % setting global options for tcolorbox
+
+\newtcolorbox{boxF}{
+    colback = sub,
+    enhanced,
+    boxrule = 1.5pt, 
+    colframe = white, % making the base for dash line
+    borderline = {1.5pt}{0pt}{main, dashed} % add "dashed" for dashed line
+}
+
+\newtcolorbox{boxK}{
+    sharpish corners, % better drop shadow
+    boxrule = 0pt,
+    toprule = 2pt, % top rule weight
+    enhanced,
+    fuzzy shadow = {0pt}{-2pt}{-0.5pt}{0.5pt}{black!35} % {xshift}{yshift}{offset}{step}{options} 
+}
+
+
+%%% Colours used in field vectors and propagation direction
+\definecolor{mycolor}{rgb}{1,0.2,0.3}
+\definecolor{brightgreen}{rgb}{0.4, 1.0, 0.0}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{ceruleanblue}{rgb}{0.16, 0.32, 0.75}
+\definecolor{darkelectricblue}{rgb}{0.33, 0.41, 0.47}
+\definecolor{darkpowderblue}{rgb}{0.0, 0.2, 0.6}
+\definecolor{darktangerine}{rgb}{1.0, 0.66, 0.07}
+\definecolor{emerald}{rgb}{0.31, 0.78, 0.47}
+\definecolor{palatinatepurple}{rgb}{0.41, 0.16, 0.38}
+\definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
+\begin{document}
+
+\begin{center}
+	\hrule
+	\vspace{.4cm}
+	{\textbf { \large \textit{Take home exam} \\ Parte I \\ \vspace{1em} Optimización} \\ \today}
+\end{center}
+\begin{center}
+{ \vspace{0.5em} Gloria del Valle Cano \hspace{\fill}   \\}
+{ gloria.valle@estudiante.uam.es \hspace{\fill} \\ \vspace{1.5em}}
+	\hrule
+\end{center}
+
+\begin{boxF}
+\paragraph*{Cuestión 1.}¿Cuáles son los criterios de parada del algoritmo simplex algebraico? Expón todas las alternativas posibles y las soluciones a que dan lugar.
+\end{boxF}
+
+Sabemos que el algoritmo se detiene cuando $z_j -c_j \leq 0$, $\forall j \in Q$, siendo $Q$ el conjunto de variables no básicas, $z_j = x_bB^{-1}a_j$ y $c_j$ la componente número $j$ del vector de costes. Que el algoritmo se detenga implica que se ha encontrado la solución más óptima.
+
+\vspace{0.5em}
+
+Además, teniendo en cuenta que, al introducir la variable $x_k$ en la base y extraer la variable de bloqueo $x_{B_r}$, si no existe un mínimo que satisfaga el criterio de la \textit{razón mínima} siguiente
+
+$$
+\frac{\bar b_r}{y_{rk}} = \min_{1\leq i \leq m} \left\{ \frac{\bar b_i}{y_{ik}} : y_{ik} > 0 \right\},
+$$
+
+entonces el problema tiene solución no acotada.
+
+\vspace{0.5em}
+
+\textit{Nota: $\bar b = B^{-1}b$ y $y_k = B^{-1}a_k$}.
+
+\vspace{1em}
+
+\begin{boxF}
+\paragraph*{Cuestión 2.}Una forma alternativa de definición de problemas de programación lineal viene dada por el modelo dual. En esta cuestión se pide que definas cuál es el Problema Dual de un Problema Primal.
+\end{boxF}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item ¿Qué relación existe entre ambos en términos de las soluciones posibles?
+    
+    Definimos el problema dual de un PPL de un problema primal dado teniendo en cuenta los siguientes puntos:
+    \begin{itemize}
+        \item Las restricciones del problema primal de un PPL se convierten en variables del problema dual.
+        \item Las variables del problema primal de un PPL se convierten en restricciones del problema dual.
+        \item Asimismo, la función objetivo se invierte. Esto nos lleva a afirmar que maximizar el problema primal es lo mismo que minimizar el problema dual.
+    \end{itemize}
+    \vspace{0.5em}
+    Determinamos que las relaciones entre las posibles soluciones del problema primal y el problema dual vienen
+    dadas por el \textbf{Teorema Fundamental de Dualidad}:
+    \begin{boxK}
+        Dado un problema de optimización lineal primal y su correspondiente problema dual asociado se cumple solamente
+        una de las siguientes afirmaciones:
+        \begin{itemize}
+            \item Ambos poseen soluciones óptimas $\mathbf{x^*}$ y $\mathbf{w^*}$ para PPL primal y dual, respectivamente. Se cumple
+            además que $c\mathbf{x^*} = \mathbf{x^*}b$.
+            \item Uno de los problemas tiene solución no acotada y el otro no tiene solución.
+            \item Ninguno de los dos problemas tiene solución.
+        \end{itemize} 
+    \end{boxK}
+    \item ¿Ofrece alguna ventaja la formulación dual respecto de la primal?
+    
+    Teniendo en cuenta las afirmaciones del \textbf{Teorema Fundamental de Dualidad} vemos que
+    la ventaja reside en la cantidad de variables, ya que si tenemos pocas restricciones en el problema dual, vamos a tener menos variables en el problema dual. Ajeno a todo esto,
+    no existe ventaja mayor que esa, ya que si no tiene solución el problema dual, el problema primal tampoco lo tiene.
+\end{enumerate}
+
+\vspace{1em}
+
+\begin{boxF}
+\paragraph*{Ejercicio 1.}Demostrar que:
+
+
+Dada $f: S \to \mathbb{R}, S \subset \mathbb{R}^n$, $S$ no vacío y convexo, entonces $f$ es cuasiconvexa si y solo si el conjunto $S_\alpha \left\{ x \in S: f(x) \leq \alpha \right\} $ es convexo para cada $\alpha \in \mathbb{R}$.
+\end{boxF}
+
+Probando ambas implicaciones tenemos:
+
+\begin{itemize}
+    \item $\left[ \Longrightarrow \right]$ Por un lado, tenemos que si la función $f$ es cuasiconvexa se tiene que tomando $x_1, x_2 \in S_\alpha$ y $\lambda \in [0,1]$ se tiene que
+    
+        $$
+        \begin{align*}
+            f(\lambda x_1 + (1-\lambda) x_2) &\leq \max \left\{ f(x_1), f(x_2) \right\} \leq \alpha \\
+            &\implies \lambda x_1 + (1-\lambda) x_2 \in S_\alpha, \;\;\;\; \forall  x_1, x_2 \in S_\alpha \text{y} \lambda \in [0,1],    
+        \end{align*}
+        $$
+
+        lo que nos lleva a decir que $S_\alpha$ es convexo.
+
+    \item $\left[ \Longleftarrow \right]$ Por el otro lado podemos plantear el problema por reducción al absurdo.
+    Asimismo, asumimos que $f$ no es una función cuasiconvexa y que $S_\alpha$ es un conjunto convexo $\forall \alpha \in \mathbb{R}$, por tanto
+    $\exists x_1, x_2 \in S$ y $\alpha \in (0,1)$ $: f(\lambda x_1 + (1-\lambda) x_2) > \max \left\{ f(x_1), f(x_2) \right\}$.
+    
+    Por tanto, $S_\alpha$ es un conjunto convexo para $\alpha=\max\left\{ f(x_1), f(x_2)\right\}$, ya que lo es $\forall \alpha \in \mathbb{R}$. En este caso
+    $$
+        \begin{align*}
+            x_1, x_2 \in S_\alpha &\implies \lambda x_1 + (1-\lambda) x_2 \in S_\alpha \\
+            &\implies f(\lambda x_1 + (1-\lambda) x_2) \leq \max \left\{ f(x_1), f(x_2)\right\},
+        \end{align*}
+        $$
+    
+        lo cual es una contradicción con el planteamiento del problema y por tanto $f$ es una función cuasiconvexa en $S$.
+    
+\end{itemize}
+
+\vspace{1em}
+
+\begin{boxF}
+\paragraph*{Ejercicio 2.}Haciendo uso de la Cuestión 2, demostrar que el siguiente problema carece de solución.
+
+$$
+\text{Maximizar } z=x_3\text{, sujeto a}
+\begin{cases} 
+2x_1 - x_2 + x_3 \;\;\; \leq -1 \\
+-x_1 + 2x_2 + x_3 \leq -1 \\
+x_1, x_2, x_3 \;\;\;\;\;\;\;\;\;\; \geq 0
+\end{cases}
+$$
+\end{boxF}
+
+\vspace{0.5em}
+
+Para resolver este problema estudiamos el problema dual asociado, convirtiéndolo a un problema de minimización.
+
+$$
+\text{Minimizar } z=-y_1 -y_2 \text{, sujeto a}
+\begin{cases} 
+2y_1 - y_2  \;\;\;\;\; \geq 0 \\
+-y_1 + 2y_2 \;\;\;  \geq 0 \\
+y_1 + y_2  \;\;\;\;\;\;\; \geq 1 \\
+y_1, y_2  \;\;\;\;\;\;\;\;\;\;   \geq 0
+\end{cases}
+$$
+
+
+\vspace{1em}
+
+Vamos a resolverlo por el \textbf{método de las dos fases}.
+
+
+\vspace{0.5em}
+
+
+\begin{center}
+    \underline{Planteamiento del problema}
+\end{center}
+
+$$
+\text{Minimizar } A_1 \text{, sujeto a}
+\begin{cases} 
+-2y_1 + y_2 + s_1 \;\;\;\; = 0 \\
+\;\; y_1 - 2y_2 + s_2 \;\;\;\;\;  = 0 \\
+y_1 + y_2 - s_3 + A_1 \; = 1 \\
+y_1, y_2, s_1, s_2, s_3, A_1    \geq 0
+\end{cases}
+$$
+
+\vspace{0.5em}
+
+\begin{center}
+    \underline{Primera fase}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ |c|c||c|g|c|c|c|c||c|}
+    \hline 
+    & $c_j$ & 0 & 0 & 0 & 0 & 0 & 1 &\\
+    \hline \hline 
+    $c_B$ & Base & $y_1$ & $y_2$ & $s_1$ & $s_2$  & $s_3$ & $A_1$ & $LD$ \\
+    \hline \hline
+    0 & $s_1$ & -2 & 1 & 1 & 0 & 0 & 0 & 0 \\
+    \hline
+    0 & $s_2$ & \textbf{1} & -2 & 0 & 1 & 0 & 0 & 0 \\
+    \hline
+    1 & $A_1$ & 1 & 1 & 0 & 0 & -1 & 1 & 1 \\
+    \hline
+    & $z$ & 1 & 1 & 0 & 0 & -1 & 0 & 1 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{center}
+    Primera iteración
+\end{center}
+
+
+\begin{center}
+    \begin{tabular}{ |c|c||c|g|c|c|c|c||c|}
+    \hline 
+    & $c_j$ & 0 & 0 & 0 & 0 & 0 & 1 &\\
+    \hline \hline 
+    $c_B$ & Base & $y_1$ & $y_2$ & $s_1$ & $s_2$  & $s_3$ & $A_1$ & $LD$ \\
+    \hline \hline
+    0 & $s_1$ & 0 & -3 & 1 & 2 & 0 & 0 & 0 \\
+    \hline
+    0 & $x_1$ & 1 & -2 & 0 & 1 & 0 & 0 & 0 \\
+    \hline
+    1 & $A_1$ & 1 & \textbf{3} & 0 & -1 & -1 & 1 & 1 \\
+    \hline
+    & $z$ & 0 & 3 & 0 & -1 & -1 & 1 & 1 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\newpage
+
+\begin{center}
+    Segunda iteración
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ |c|c||c|g|c|c|c|c||c|}
+    \hline 
+    & $c_j$ & 0 & 0 & 0 & 0 & 0 & 1 &\\
+    \hline \hline 
+    $c_B$ & Base & $y_1$ & $y_2$ & $s_1$ & $s_2$  & $s_3$ & $A_1$ & $LD$ \\
+    \hline \hline
+    0 & $s_1$ & 0 & 0 & 1 & 1 & -1 & 1 & 1 \\
+    \hline
+    0 & $x_1$ & 1 & 0 & 0 & 1/3 & -2/3 & 2/3 & 2/3 \\
+    \hline
+    1 & $x_2$ & 0 & 1 & 0 & -1/3 & -1/3 & 1/3 & 1/3 \\
+    \hline
+    & $z$ & 0 & 0 & 0 & 0 & 0 & -1 & 0 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{center}
+    \underline{Segunda fase}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ |c|c||c|g|c|c|c|c||c|}
+    \hline 
+    & $c_j$ & 0 & 0 & 0 & 0 & 0 & 1 &\\
+    \hline \hline 
+    $c_B$ & Base & $y_1$ & $y_2$ & $s_1$ & $s_2$  & $s_3$ & $A_1$ & $LD$ \\
+    \hline \hline
+    0 & $s_1$ & 0 & 0 & 1 & 1 & -1 & 1 & 1 \\
+    \hline
+    0 & $x_1$ & 1 & 0 & 0 & 1/3 & -2/3 & 2/3 & 2/3 \\
+    \hline
+    1 & $x_2$ & 0 & 1 & 0 & -1/3 & -1/3 & 1/3 & 1/3 \\
+    \hline
+    & $z$ & 0 & 0 & 0 & 0 & 0 & -1 & 0 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+La variable $s_3$ debería entrar en la base pero no hay variable que pueda salir de la base, ya que todos
+los coeficientes que tenemos son negativos, por lo que el problema no tiene solución acotada. Recordando el \textbf{Teorema (Fundamental de Dualidad)}, sabemos que 
+como el problema dual no tiene solución acotada, entonces el problema primal no tiene solución.
+
+
+\vspace{2em}
+
+\textit{Nota:} la teoría sobre el Teorema Fundamental de la Dualidad se ha consultado en 
+Bazaraa, Mokhtar S, Jarvis, John J, & Sherali, Hanif D. (2011). Linear programming and network flows (4th ed.). Somerset: Wiley.
+\end{document}

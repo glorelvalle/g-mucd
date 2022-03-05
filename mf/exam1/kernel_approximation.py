@@ -67,7 +67,7 @@ class RandomFeaturesSampler(BaseEstimator, TransformerMixin):
 
         elif self.sampling_method == "cos":
 
-            """Q7. Implement the sampling method based
+            """Q8. Implement the sampling method based
             on the second type of random features.
             """
             #  <YOUR CODE HERE>
