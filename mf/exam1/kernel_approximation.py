@@ -70,10 +70,10 @@ class RandomFeaturesSampler(BaseEstimator, TransformerMixin):
             """Q8. Implement the sampling method based
             on the second type of random features.
             """
-            rng = np.random.default_rng(seed=self.random_state)
+            rng = np.random.default_rng()
             b = rng.uniform(0, 2 * np.pi, self._n_random_samples_w)
-            random_features = np.cos(X @ self._w.T + b)
-            normalization_factor = np.sqrt(2 / self._n_random_samples_w)
+            random_features = np.cos(X @ self.w.T + b)
+            normalization_factor = np.sqrt(self._n_random_samples_w / 2)
 
         else:
             raise ValueError("Please enter a correct sampling method")
@@ -205,8 +205,7 @@ class RandomFeaturesSamplerExp(RandomFeaturesSampler):
         """
 
         D = np.shape(X)[1]
-
-        self.w = self.sample_from_exp(D, self.n_features_sampled)
+        self.w = self.sample_from_exp(D, self._n_random_samples_w)
 
         return self
 
@@ -352,3 +351,104 @@ def demo_kernel_approximation_features(
         ax.set_yticks([])
         plt.tight_layout()
     plt.show()
+
+
+def demo_kernel_approximation_features(
+    X: np.ndarray,
+    kernel: Callable[[np.ndarray, np.ndarray], np.ndarray],
+    features_sampler: Union[RandomFeaturesSampler, NystroemFeaturesSampler],
+    n_features: np.array,
+) -> None:
+    """Kernel approximation using random Fourier features (RFF)."""
+    n_plots = len(n_features) + 1
+    fig, axes = plt.subplots(1, n_plots)
+    fig.set_size_inches(15, 4)
+    font = {"fontname": "arial", "fontsize": 18}
+
+    kernel_matrix = kernel(X, X)
+    axes[0].imshow(kernel_matrix, cmap=plt.cm.Blues)
+    axes[0].set_title("Exact kernel", **font)
+    axes[0].set_xticks([])
+    axes[0].set_yticks([])
+
+    for n, ax in zip(n_features, axes[1:]):
+        print("# of features = ", n)
+
+        features_sampler.set_params(
+            n_features_sampled=n
+        )  # Modified number of random features of each class
+        X_features = features_sampler.fit_transform(X)
+        kernel_matrix_approx = X_features @ X_features.T
+
+        ax.imshow(kernel_matrix_approx, cmap=plt.cm.Blues)
+
+        err_approx = kernel_matrix - kernel_matrix_approx
+        err_mean = np.mean(np.abs(err_approx))
+        err_max = np.max(np.abs(err_approx))
+
+        ax.set_xlabel(
+            "err (mean) = {:.4f} \n err (max) = {:.4f}".format(err_mean, err_max),
+            **font,
+        )
+
+        ax.set_title("{} features".format(n), **font)
+
+        ax.set_xticks([])
+        ax.set_yticks([])
+        plt.tight_layout()
+    plt.show()
+
+
+def demo_kernel_approximation_error_evolution(
+    X: np.ndarray,
+    kernel: Callable[[np.ndarray, np.ndarray], np.ndarray],
+    features_sampler: Union[RandomFeaturesSampler, NystroemFeaturesSampler],
+    N: int,
+) -> None:
+    """
+    Parameters
+    ----------
+    X:
+        Data matrix
+    kernel:
+        Kernel function
+    features_sampler:
+        Nystroem or Random features sampler
+    N:
+        Upper bound on the number of simulations
+
+
+    Returns
+    -------
+        Plot error evolution of Kernel approximation
+
+    """
+
+    kernel_matrix = kernel(X, X)
+
+    err_means = []
+    features_range = range(2, N + 1, 2)
+    for n in features_range:
+        features_sampler.set_params(n_features_sampled=n)
+        X_features = features_sampler.fit_transform(X)
+        kernel_matrix_approx = X_features @ X_features.T
+        err_means.append(np.mean(np.abs(kernel_matrix - kernel_matrix_approx)))
+
+    plt.plot(features_range, err_means, label="empirical error")
+    if isinstance(features_sampler, NystroemFeaturesSampler):
+        plt.plot(
+            features_range,
+            1 / np.power(features_range, 5 / 4),  # chosen for convenience
+            label="theoretical error Nystrom",
+        )
+    else:
+        plt.plot(
+            features_range,
+            1 / np.sqrt(features_range),
+            label="theoretical error Monte Carlo",
+        )
+
+    plt.legend()
+    plt.title("Evolution of mean approximation error")
+    plt.xlabel("n features sampled")
+    plt.ylabel("mean absolute error")
