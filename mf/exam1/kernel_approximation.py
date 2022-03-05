@@ -70,7 +70,10 @@ class RandomFeaturesSampler(BaseEstimator, TransformerMixin):
             """Q8. Implement the sampling method based
             on the second type of random features.
             """
-            #  <YOUR CODE HERE>
+            rng = np.random.default_rng(seed=self.random_state)
+            b = rng.uniform(0, 2 * np.pi, self._n_random_samples_w)
+            random_features = np.cos(X @ self._w.T + b)
+            normalization_factor = np.sqrt(2 / self._n_random_samples_w)
 
         else:
             raise ValueError("Please enter a correct sampling method")
