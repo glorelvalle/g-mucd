@@ -187,7 +187,10 @@ class RandomFeaturesSamplerExp(RandomFeaturesSampler):
     """Random Fourier Features for the exponential kernel."""
 
     def __init__(
-        self, n_features_sampled: int, sampling_method: str, length_scale_kernel: float
+        self,
+        n_features_sampled: int = 100,
+        sampling_method: str = "sin+cos",
+        length_scale_kernel: float = 1.0,
     ) -> None:
         super().__init__(n_features_sampled, sampling_method)
         self.length_scale_kernel = length_scale_kernel
