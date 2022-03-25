@@ -1,0 +1,199 @@
+\documentclass[12pt]{scrartcl}
+\title{ELEC 340 Assignment 3}
+\nonstopmode
+%\usepackage[utf-8]{inputenc}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx} % Required for including pictures
+\usepackage[figurename=Figure]{caption}
+\usepackage{float}    % For tables and other floats
+\usepackage{verbatim} % For comments and other
+\usepackage{amsmath}  % For math
+\usepackage{amssymb}  % For more math
+\usepackage{fullpage} % Set margins and place page numbers at bottom center
+\usepackage{paralist} % paragraph spacing
+\usepackage{listings} % For source code
+\usepackage{subfig}   % For subfigures
+%\usepackage{physics}  % for simplified dv, and 
+\usepackage{enumitem} % useful for itemization
+\usepackage{siunitx}  % standardization of si units
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow} % para las tablas
+\usepackage{enumitem}
+	
+\usepackage{color, colortbl}
+\usepackage[margin=0.8in]{geometry} % for PAPER & MARGIN
+\usepackage[many]{tcolorbox}    	% for COLORED BOXES (tikz and xcolor included)
+\usepackage{setspace}               % for LINE SPACING
+\usepackage{multicol}               % for MULTICOLUMNS
+
+%\setlength\columnsep{0.25in} % setting length of column separator
+\definecolor{main}{HTML}{5989cf}    % setting main color to be used
+\definecolor{sub}{HTML}{cde4ff}     % setting sub color to be used
+
+\definecolor{commentgreen}{RGB}{2,112,10}
+\definecolor{highlightblue}{RGB}{31,119,220}
+\definecolor{eminence}{RGB}{108,48,130}
+\definecolor{weborange}{RGB}{255,129,0}
+\definecolor{frenchplum}{RGB}{129,20,83}
+\definecolor{darkpink}{RGB}{229,4,101}
+\definecolor{gray}{gray}{0.9}
+
+\tcbset{
+    sharp corners,
+    colback = white,
+    before skip = 0.2cm,    % add extra space before the box
+    after skip = 0.5cm      % add extra space after the box
+}                           % setting global options for tcolorbox
+
+\newtcolorbox{boxF}{
+    colback = sub,
+    enhanced,
+    boxrule = 1.5pt, 
+    colframe = white, % making the base for dash line
+    borderline = {1.5pt}{0pt}{main, dashed} % add "dashed" for dashed line
+}
+
+\newtcolorbox{boxK}{
+    sharpish corners, % better drop shadow
+    boxrule = 0pt,
+    toprule = 2pt, % top rule weight
+    enhanced,
+    fuzzy shadow = {0pt}{-2pt}{-0.5pt}{0.5pt}{black!35} % {xshift}{yshift}{offset}{step}{options} 
+}
+
+
+%%% Colours used in field vectors and propagation direction
+\definecolor{mycolor}{rgb}{1,0.2,0.3}
+\definecolor{brightgreen}{rgb}{0.4, 1.0, 0.0}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{ceruleanblue}{rgb}{0.16, 0.32, 0.75}
+\definecolor{darkelectricblue}{rgb}{0.33, 0.41, 0.47}
+\definecolor{darkpowderblue}{rgb}{0.0, 0.2, 0.6}
+\definecolor{darktangerine}{rgb}{1.0, 0.66, 0.07}
+\definecolor{emerald}{rgb}{0.31, 0.78, 0.47}
+\definecolor{palatinatepurple}{rgb}{0.41, 0.16, 0.38}
+\definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
+\begin{document}
+
+\begin{center}
+	\hrule
+	\vspace{.4cm}
+	{\textbf { \large \textbf{Take home exam} \\ Part II \\ \vspace{1em} \textit{Convex Unconstrained and Constrained Optimization}} \\ \vspace{0.5em}\today}
+\end{center}
+
+\begin{center}
+{ \vspace{0.5em} Gloria del Valle Cano \hspace{\fill}   \\}
+{ gloria.valle@estudiante.uam.es \hspace{\fill} \\ \vspace{1.5em}}
+	\hrule
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{boxF}
+\paragraph*{Problem 1.}(1 point) \hspace{0.15em} We have worked out the elementary version of Lagrange multipliers assuming that from $g(x, y) = 0$ we can find a function $y = h(x)$ such that $g(x, h(x)) = 0$. 
+
+But sometimes what we get is that there is an $h$ such that $g(h(y), y) = 0$. Rewrite the Lagrange multiplier analysis in the lecture slides under this assumption.
+\end{boxF}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vspace{0.5em}
+
+
+
+\vspace{1em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{boxF}
+\paragraph*{Problem 2.} (3 points) \hspace{0.15em} We want to solve the following constrained minimization problem:
+
+
+    \begin{align*}
+        \mbox{min   \hspace{0.7em}}  & f(x, y) = x^2 + 2xy + 2y^2 - 3x + y \\
+        \mbox{s.t.  \hspace{0.7em}} & x + y = 1, \\
+        & x \geq 0, y \geq 0.
+    \end{align*}
+    
+Argue first that $f$ is convex and then:
+
+\begin{itemize}
+    \item Write its Lagrangian with $\alpha, \beta$ the multipliers of the inequality constraints.
+    \item Write the KKT conditions.
+    \item Use them to solve the problem. For this consider separately the $(\alpha = \beta = 0), (\alpha > 0, \beta = 0), (\alpha = 0, \beta > 0), (\alpha > 0, \beta > 0)$ cases.
+\end{itemize}
+
+
+\end{boxF}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\vspace{1em}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{boxF}
+\paragraph*{Problem 3.} (1 point) \hspace{0.15em} Let $f : S \subset \mathbb{R}^d \to \mathbb{R}$ be a convex function on the convex set $S$ and we extend it to an $\tilde f : \mathbb{R}^d \to \mathbb{R}$ as:
+
+    \begin{align*}
+        \tilde f(x) &= f(x) \mbox{ if } x \in S. \\
+                    &= +\infty \mbox{ if } x \notin S.
+    \end{align*}
+
+Show that $\tilde f$ is a convex function on $\mathbb{R}^d$. Assume that $a + \infty = \infty $ and that $ a \cdot \infty = 1$ for $a > 0$.
+\end{boxF}
+
+
+
+\vspace{1em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{boxF}
+\paragraph*{Problem 4.} (2 points) \hspace{0.15em} Prove \textbf{Jensen's inequality}: if $f$ is convex on $\mathbb{R}^d$ and $\sum_1^k \lambda_i = 1$, with $0 \leq \lambda_i \leq 1$ we have for any $x_1, ..., x_k \in \mathbb{R}^d$
+
+    $$
+    f\left(\sum_1^k \lambda_i x_i\right) \leq \sum_1^k \lambda_i f(x_i)
+    $$
+
+\textit{Hint: just write $\sum_1^k \lambda_i x_i = \lambda_1 x_1 + \left( 1 - \lambda_1\right)$ for an appropriate $v$ and apply repeatedly the definition of a convex function. Start with $k = 3$ and carry on.}
+
+\end{boxF}
+
+
+
+\vspace{1em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{boxF}
+\paragraph*{Problem 5.} (3 points) \hspace{0.15em} Prove that the following function is convex
+
+    \begin{align*}
+        f(x) &= x^2 -1, \hspace{3.3em} |x| > 1 \\
+             &= 0       \hspace{6em} |x| \leq 1
+    \end{align*}
+
+and compute its proximal. Which are the fixed points of this proximal?
+\end{boxF}
+
+
+
+\vspace{1em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
