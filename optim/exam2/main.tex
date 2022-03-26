@@ -1,5 +1,5 @@
 \documentclass[12pt]{scrartcl}
-\title{ELEC 340 Assignment 3}
+\title{Take home exam II}
 \nonstopmode
 %\usepackage[utf-8]{inputenc}
 \usepackage{array}
@@ -22,12 +22,15 @@
 \usepackage{multicol}
 \usepackage{multirow} % para las tablas
 \usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
 	
 \usepackage{color, colortbl}
 \usepackage[margin=0.8in]{geometry} % for PAPER & MARGIN
 \usepackage[many]{tcolorbox}    	% for COLORED BOXES (tikz and xcolor included)
 \usepackage{setspace}               % for LINE SPACING
 \usepackage{multicol}               % for MULTICOLUMNS
+
 
 %\setlength\columnsep{0.25in} % setting length of column separator
 \definecolor{main}{HTML}{5989cf}    % setting main color to be used
@@ -40,6 +43,7 @@
 \definecolor{frenchplum}{RGB}{129,20,83}
 \definecolor{darkpink}{RGB}{229,4,101}
 \definecolor{gray}{gray}{0.9}
+
 
 \tcbset{
     sharp corners,
@@ -77,6 +81,16 @@
 \definecolor{emerald}{rgb}{0.31, 0.78, 0.47}
 \definecolor{palatinatepurple}{rgb}{0.41, 0.16, 0.38}
 \definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
+
+
+\hypersetup{%
+    colorlinks=True,
+    urlcolor=darkpowderblue,
+    citecolor=darkpowderblue,
+    linkcolor=darkpowderblue
+    }
+
+
 \begin{document}
 
 \begin{center}
@@ -101,12 +115,54 @@ But sometimes what we get is that there is an $h$ such that $g(h(y), y) = 0$. Re
 \end{boxF}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+For $f,g: \mathbb{R}^2 \to \mathbb{R}$ consider the following minimization problem
 
-\vspace{0.5em}
+\begin{equation*}
+    \min f(x, y) \mbox{ s.t. } g(x, y) = 0
+\end{equation*}
 
+Assuming the \textbf{Implicit Function Theorem} holds, we can find a function $x = h(y)$ s.t. $g(h(y), y) = 0$ and, thus, we can write
 
+\begin{equation*}
+    f(x, y) = f(h(y), y) = \Psi(y).
+\end{equation*}
 
-\vspace{1em}
+At a minimum $y^\ast$ with $x^\ast = h(y^\ast)$ we thus have
+
+\begin{equation}
+    \label{eq:eq1}
+    0 = \Psi ' (y^\ast) = \frac{\partial g}{\partial x}(x^\ast, y^\ast) h'(y^\ast) + \frac{\partial g}{\partial y}(x^\ast, y^\ast)
+\end{equation}
+
+But since $g(h(y), y) = 0$, we also have
+
+\begin{equation}
+    \label{eq:eq2}
+    0 = \frac{\partial g}{\partial x}(x^\ast, y^\ast) h'(y^\ast) + \frac{\partial g}{\partial y}(x^\ast, y^\ast) 
+    \implies h'(y^\ast) = -\frac{\frac{\partial g}{\partial y}(x^\ast, y^\ast)}{\frac{\partial g}{\partial x}(x^\ast, y^\ast)}
+\end{equation}
+
+Putting together \ref{eq:eq1} and \ref{eq:eq2} we arrive at
+\begin{equation*}
+    0 = \frac{\partial f}{\partial y}(x^\ast, y^\ast) \frac{\partial g}{\partial x}(x^\ast, y^\ast) - \frac{\partial f}{\partial x}(x^\ast, y^\ast) \frac{\partial g}{\partial y}(x^\ast, y^\ast) 
+\end{equation*}
+
+That is, at $(x^\ast, y^\ast)$, $\nabla f \perp \left( - \frac{\partial g}{\partial y}, \frac{\partial g}{\partial x}\right) $ and, since 
+$\left( - \frac{\partial g}{\partial y}, \frac{\partial g}{\partial x}\right) \perp \nabla g $, we have $\nabla f \| \nabla g$ i.e.
+$\nabla f(x^\ast, y^\ast) = - \lambda^\ast \nabla g(x^\ast, y^\ast)$ for some $\lambda^\ast \neq 0$.
+
+Thus, for the \textbf{Lagrangian}
+
+\begin{equation*}
+    \mathcal{L}(x, y, \lambda) = f(x, y) + \lambda g(x, y),
+\end{equation*}
+
+we have a minimum $(x^\ast, y^\ast)$ there is a $\lambda^\ast \neq 0$ s.t.
+
+\begin{equation*}
+    \nabla \mathcal{L}(x^\ast, y^\ast, \lambda^\ast) = \nabla f(x^\ast, y^\ast) + \lambda^\ast \nabla g(x^\ast, y^\ast) = 0.
+\end{equation*}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -152,9 +208,34 @@ Argue first that $f$ is convex and then:
 Show that $\tilde f$ is a convex function on $\mathbb{R}^d$. Assume that $a + \infty = \infty $ and that $ a \cdot \infty = 1$ for $a > 0$.
 \end{boxF}
 
+We say that $S$ is a \textbf{convex set} if for all $x, x' \in S$ and $\lambda \in [0,1]$,
+
+\begin{equation*}
+    \lambda x + (1 - \lambda) x' \in S.
+\end{equation*}
+
+We know $S \subset \mathbb{R}^d$ is a non empty convex set. Let $x, x' \in S$ and $\lambda \in [0,1]$, so here we cover two cases:
+
+\begin{itemize}
+    \item \textit{First case}. If $x \in S$, we have by definition that
+    
+    \begin{equation*}
+        \tilde f (\lambda x + (1- \lambda)x') = f (\lambda x + (1- \lambda)x')  \leq \lambda f(x) + (1-\lambda) = \lambda \tilde f(x) + (1-\lambda)
+    \end{equation*}
+
+    is convex.
+
+    \item \textit{Second case}. If $x \notin S$, we have that
+    \begin{equation*}
+        \lambda \tilde f (x) + (1 - \lambda) \tilde f (x') = + \infty,
+    \end{equation*}
+
+    which we can say it is directly convex, $\tilde f (y) \leq + \infty$, $\forall y$. Note that this also applies to $x'$.
+\end{itemize}
+
+Since both cases satisfy convexity, we proof that this function is convex.
 
 
-\vspace{1em}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
