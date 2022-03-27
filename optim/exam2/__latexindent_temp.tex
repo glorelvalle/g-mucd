@@ -184,9 +184,38 @@ Argue first that $f$ is convex and then:
     \item Use them to solve the problem. For this consider separately the $(\alpha = \beta = 0), (\alpha > 0, \beta = 0), (\alpha = 0, \beta > 0), (\alpha > 0, \beta > 0)$ cases.
 \end{itemize}
 
-First, we know that $f$ is nor convex because it has two convex inequality constraints, and an affine equality one. Also, there are 
-
 \end{boxF}
+
+
+First of all, we know that $f$ is not convex because it has two convex inequality constraints, and an affine equality one. Also, there are Slater points.
+
+Now we need to solve it looking for a KKT point, so we write first the Lagrangian with inequality multipliers, $\alpha, \beta$.
+
+\begin{equation*}
+    \mathcal{L}(x, y, \lambda, \alpha, \beta) = x^2 + 2xy + 2y^2 -3x + y + \lambda(x + y -1) - \alpha x - \beta y.
+\end{equation*}
+
+We write its KKT conditions.
+\begin{align*}
+    0 &= \frac{\partial \mathcal{L}}{\partial x} = \lambda + 2x + 2y -3 - \alpha\\
+    0 &= \frac{\partial \mathcal{L}}{\partial y} = \lambda + 2x + 4y + 1 - \beta\\
+    0 &= \alpha x \\
+    0 &= \beta y \\
+\end{align*}
+Then, we use them to solve the problem, considering the four possible cases below:
+\begin{itemize}
+    \item Case $\alpha = \beta = 0$.
+    \begin{align*}
+        0 &= \frac{\partial \mathcal{L}}{\partial x} = \lambda + 2x + 2y -3 \\
+        0 &= \frac{\partial \mathcal{L}}{\partial y} = \lambda + 2x + 4y + 1 \\
+    \end{align*}
+    So we get $2x + 2y -3 = 2x + 4y +1 \implies 2y = -4 \implies y = -2$. Then, $x = 1-y = 3$. So we have $(3, -2)$ as KKT point.
+    \item Case $\alpha > 0, \beta = 0$.
+    \item Case $\alpha = 0, \beta > 0$.
+    \item Case $\alpha > 0, \beta > 0$.
+\end{itemize}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

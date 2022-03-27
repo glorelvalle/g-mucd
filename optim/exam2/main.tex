@@ -163,6 +163,9 @@ we have a minimum $(x^\ast, y^\ast)$ there is a $\lambda^\ast \neq 0$ s.t.
 \begin{equation*}
     \nabla \mathcal{L}(x^\ast, y^\ast, \lambda^\ast) = \nabla f(x^\ast, y^\ast) + \lambda^\ast \nabla g(x^\ast, y^\ast) = 0.
 \end{equation*}
+
+
+\vspace{1em}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -184,9 +187,54 @@ Argue first that $f$ is convex and then:
     \item Use them to solve the problem. For this consider separately the $(\alpha = \beta = 0), (\alpha > 0, \beta = 0), (\alpha = 0, \beta > 0), (\alpha > 0, \beta > 0)$ cases.
 \end{itemize}
 
-First, we know that $f$ is nor convex because it has two convex inequality constraints, and an affine equality one. Also, there are 
-
 \end{boxF}
+
+
+First of all, we verify that $f$ is convex because its Hessian matrix is positive semidefinite, or equivalently its eigenvalues are non-negative. The Hessian matrix is
+
+\[
+\mathbf{H}_f = \begin{bmatrix}\frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y} \\[0.6em]
+    \frac{\partial^2 f}{\partial y \partial x} & \frac{\partial^2 f}{\partial y^2}\end{bmatrix} = \begin{bmatrix}
+        2 & 2 \\ 2 & 4
+    \end{bmatrix},
+\]
+whose eigenvalues are $\lambda_1 = 3 + \sqrt{5}$ and $\lambda_2 = 3 - \sqrt{5}$, both positive. As a result, we determine $f$ is convex.\\
+
+Now we write its Lagrangian, with $\alpha$ and $\beta$ as multipliers of the inequality constraints and $\lambda$ as equality constraint multiplier. 
+
+
+\begin{equation*}
+    \mathcal{L}(x, y, \lambda, \alpha, \beta) = x^2 + 2xy + 2y^2 -3x + y + \lambda(x + y -1) - \alpha x - \beta y.
+\end{equation*}
+
+\vspace{0.5em}
+
+Assuming that the hypothesis of the KKT conditions theorem hold, the resulting KKT conditions on a local minimum $(x^\ast, y^\ast)$ are the following:
+\begin{align*}
+    0 &= \frac{\partial \mathcal{L}}{\partial x} (x^\ast, y^\ast, \lambda, \alpha, \beta) \implies \lambda + 2x^\ast + 2y^\ast -3 - \alpha = 0,\\
+    0 &= \frac{\partial \mathcal{L}}{\partial y} (x^\ast, y^\ast, \lambda, \alpha, \beta) \implies \lambda + 2x^\ast + 4y^\ast + 1 - \beta = 0,\\
+    0 &= \alpha x^\ast ,\\
+    0 &= \beta y^\ast .\\
+\end{align*}
+Then, we use them to solve the problem, considering the four possible cases below:
+\begin{itemize}
+    \item Case $\alpha = \beta = 0$.
+    \begin{align*}
+        0 &= \frac{\partial \mathcal{L}}{\partial x} = \lambda + 2x + 2y -3 \\
+        0 &= \frac{\partial \mathcal{L}}{\partial y} = \lambda + 2x + 4y + 1 \\
+    \end{align*}
+    From both expressions we get $2x + 2y -3 = 2x + 4y +1 \implies 2y = -4 \implies y = -2$. Then, $x = 1-y = 3$ and $\lambda=-1$. So we have $\mathbf{(3, -2)'}$ as \textbf{feasible KKT point}.
+    \item Case $\alpha > 0, \beta = 0$.
+    When $\alpha > 0$, $x=0$, so $y=1$ and $\lambda=-5$. Therefore we have a \textbf{feasible KKT point} on $\mathbf{(0, 1)'}$.
+    \item Case $\alpha = 0, \beta > 0$.
+    When $\beta > 0$, $y=0$, so $x=1$ and $\lambda=1$. Therefore we have a \textbf{feasible KKT point} on $\mathbf{(1, 0)'}$.
+    \item Case $\alpha > 0, \beta > 0$.
+    This implies $x=y=0$, so we have a contradiction because $x + y \neq 1$. This means that $(0,0)'$ \textbf{is not} a feasible KKT point.
+\end{itemize}
+
+Given all points found, we can determine that our optimal solution is $\mathbf{(1, 0)'}$, with an optimal value $\mathbf{\lambda=1}$.
+
+\vspace{1em}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -230,6 +278,7 @@ Let $x, x' \in S$ and $\lambda \in [0,1]$, so here we cover two cases:
 
 Since both cases satisfy convexity definition holds, we conclude this function is convex.
 
+\vspace{1em}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -237,7 +286,7 @@ Since both cases satisfy convexity definition holds, we conclude this function i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{boxF}
-\paragraph*{Problem 4.} (2 points) \hspace{0.15em} Prove \textbf{Jensen's inequality}: if $f$ is convex on $\mathbb{R}^d$ and $\sum_1^k \lambda_i = 1$, with $0 \leq \lambda_i \leq 1$ we have for any $x_1, ..., x_k \in \mathbb{R}^d$
+\paragraph*{Problem 4.} (2 points) \hspace{0.15em} Prove \textbf{Jensen's inequality}: if $f$ is convex on $\mathbb{R}^d$ and $\sum_1^k \lambda_i = 1$, with $0 \leq \lambda_i \leq 1$ we have for any $x_1, \dots, x_k \in \mathbb{R}^d$
 
     $$
     f\left(\sum_1^k \lambda_i x_i\right) \leq \sum_1^k \lambda_i f(x_i)
@@ -275,7 +324,7 @@ We proceed using an inductive procedure:
 \end{itemize}
 
 
- 
+\vspace{1em}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
