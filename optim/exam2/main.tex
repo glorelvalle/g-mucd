@@ -299,11 +299,24 @@ Since both cases satisfy convexity definition holds, we conclude this function i
 We proceed using an inductive procedure:
 
 \begin{itemize}
-    \item If $k=1$ then $\lambda = 1$, so we simply have $f(x_1) = f(x_1)$, which is true, and
+    \item If $k=1$ then $\lambda = 1$, so we simply have $f(x_1) \leq f(x_1)$, which is true, and
     nothing to prove. If $k=2$ we have the definition of the convexity of $f$:
     \begin{equation*}
         \lambda_1 + \lambda_2 = 1, \ \lambda_1, \lambda_2 \geq 0 \implies f(\lambda_1 x_1 + \lambda_2 x_2) \leq \lambda_1 f(x_1) + \lambda_2 f(x_2).
     \end{equation*}
+    
+    \item Considering $k=3$, given $\lambda_1 + \lambda_2 + \lambda_3 = 1$, and $\lambda_2, \lambda_3 > 0$, we have the following inequality
+    
+    \begin{align*}
+        f\left(\lambda_1 x_1 + \lambda_2 x_2 + \lambda_3 x_3\right) &= 
+            f\left(\lambda_1 x_1 + (1 - \lambda_1) \left( \frac{\lambda_2}{\lambda_2 + \lambda_3} x_2 + \frac{\lambda_3}{\lambda_2 + \lambda_3} x_3\right) \right)\\
+            &\leq f(\lambda_1 x_1) + f\left((1-\lambda_1) \left( \frac{\lambda_2}{\lambda_2 + \lambda_3} x_2  + \left(1 - \frac{\lambda_2}{\lambda_2 + \lambda_3}\right) x_3 \right) \right)\\
+            &\leq \lambda_1 f(x_1) + (1-\lambda_1)\left(\frac{\lambda_2}{\lambda_2 + \lambda_3} f(x_2) + \left(1-\frac{\lambda_2}{\lambda_2 + \lambda_3}\right) f(x_3)\right) \\
+            &= \sum_{i=1}^3 \lambda_i f(x_i),
+    \end{align*}
+    
+    where we applied the case $k=2$ twice.
+    
     \item We assume the statement its true for $k$ and consider $k+1$ points $x_1, \dots, x_{k+1}$, with coefficients $\lambda_1, \dots, \lambda_{k+1} \geq 0$, $\sum_{i=1}^{k+1} \lambda_i = 1$. The evaluation of the linear combination can be decomposed as
     \begin{equation*}
         f\left( \sum_{i=1}^{k+1} \lambda_i  x_i \right) = f\left( (1-\lambda_1) \left(\sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1} x_i\right) + \lambda_1 x_1\right).
