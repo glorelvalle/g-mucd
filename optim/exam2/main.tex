@@ -366,14 +366,14 @@ where in the first inequality comes from the fact that $m$ is convex and the sec
 %        \frac 1 2 (z -x)^2, & |z| \leq 1
 %    \end{cases}.
 %\]
-Now we compute the proximal operator of $f$ as $\mbox{prox}_f = (I + \partial f)^{-1}$ .
+Now we compute the proximal operator of $f$ as $\mbox{prox}_f = (I + \partial f)^{-1}$ . Note that $f$ is differentiable, so $\partial f (x) = \left\{ f'(x) \right\}$. Using this:
 
 \[
     (I + \partial f) (x) = 
     \begin{cases}
-        3x, &  x \in (-\infty, -1),\\
-        x & x \in  [-1, 1], \\
-        3x & x \in (1, +\infty).
+        \{3x\} &  x \in (-\infty, -1),\\
+        \{x\} & x \in  [-1, 1], \\
+        \{3x\} & x \in (1, +\infty).
     \end{cases}
 \]
 
@@ -382,15 +382,15 @@ As a result, we get the inverse operator
 \[
     (I + \partial f)^{-1} (x) = 
     \begin{cases}
-        \frac x 3 & x \in  (-\infty, -3], \\
-        -1 & x \in (-3,-1), \\
-        x, &  x \in [-1, 1],\\
-        1 & x \in (1,3), \\
-        \frac x 3 & x \in  [3, \infty),
+        \{\frac x 3 \}& x \in  (-\infty, -3], \\
+        \{-1\} & x \in (-3,-1), \\
+        \{x\} &  x \in [-1, 1],\\
+        \{1\} & x \in (1,3), \\
+        \{\frac x 3\} & x \in  [3, \infty),
     \end{cases}
 \]
 
-where the values at $(-3, -1)$ and $(1, 3)$ corresponds to the discontinuities of $(I + \partial f) (x)$. Finally, we ilustrate $(\text{I} + \partial f)^{-1}(x)$ for a better comprehension.\\
+where the values at $(-3, -1)$ and $(1, 3)$ corresponds to the breaks of $(I + \partial f) (x)$. Finally, we ilustrate $(\text{I} + \partial f)^{-1}(x)$ for a better comprehension.\\
 
 \begin{figure}[H]
     \centering
