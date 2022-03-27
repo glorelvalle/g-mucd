@@ -366,21 +366,34 @@ where in the first inequality comes from the fact that $m$ is convex and the sec
 %        \frac 1 2 (z -x)^2, & |z| \leq 1
 %    \end{cases}.
 %\]
-Now we compute the proximal operator of $f$ as $\mbox{prox}_f = (I + \partial f)^{-1}$ . Note that $f$ is differentiable, so $\partial f (x) = \left\{ f'(x) \right\}$, a single value set. Using this, and denoting it as a function:
 
+Now we compute the proximal operator of $f$ as 
 \[
-    (I + \partial f) (x) = 
-    \begin{cases}
-        3x &  x \in (-\infty, -1),\\
-        x & x \in  [-1, 1], \\
-        3x & x \in (1, +\infty).
-    \end{cases}
+    \mbox{prox}_f(x) = \arg \min_z f(z) + \frac 1 2 (z - x)^2 = \arg \min_z h(z)
 \]
+with
+\begin{equation}\label{eq:1}
+h(z) = \begin{cases}
+        z^2 - 1 + \frac 1 2 (z - x)^2 & |z| > 1 \\
+        \frac 1 2 (z - x)^2 & |z| \leq 1 \end{cases}
+\end{equation}
 
-As a result, we get the inverse operator
 
+If the minimizer is attained at $|z| \leq 1$, then clearly $z = x$, meaning that $\mbox{prox}_f(x) = x$ for $|x| \leq 1$. If it is attained at $|z| > 1$, we have
 \[
-    (I + \partial f)^{-1} (x) = 
+    0 = h'(z) = 3z - x \implies z = \frac 1 3 x,  
+\]
+which implies that $\mbox{prox}_f (x)= \frac 1 3 x$ for $|x| > 3$. The remaining values of the proximal must be studied separately: the only possible minimizers are the points of non differentiability of \eqref{eq:1}. That is $-1$ and $1$ with 
+\[
+    h(-1) = \frac 1 2 (-1 -x)^2 \quad \text{and} \quad h(1) = \frac 1 2 (1-x)^2.  
+\]
+\begin{itemize}
+    \item When $-3 < x < -1$, the function is minimized at $z = -1$, that is, the proximal is $\hbox{prox}_f(x) = -1$.
+    \item When $1 < x < 3$, the function is minimized at $z = 1$, that is, the proximal is $\hbox{prox}_f(x) = 1$.
+\end{itemize}
+As a result, the proximal is
+\[
+    \mbox{prox}_f (x) = 
     \begin{cases}
         \frac x 3 & x \in  (-\infty, -3], \\
         -1 & x \in (-3,-1), \\
@@ -390,13 +403,11 @@ As a result, we get the inverse operator
     \end{cases}
 \]
 
-where the values at $(-3, -1)$ and $(1, 3)$ corresponds to the discontinuities of $(I + \partial f) (x)$. Finally, we ilustrate $(\text{I} + \partial f)^{-1}(x)$ for a better comprehension.\\
-
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=1.5]
         \draw[->] (-4, 0) -- (4, 0) node[right] {$x$};
-        \draw[->] (0, -2) -- (0, 2) node[above] {$(\text{I} + \partial f)^{-1}(x)$};
+        \draw[->] (0, -2) -- (0, 2) node[above] {$\mbox{prox}_f(x)$};
         \draw[thick, domain=-4:-3, smooth, variable=\x, teal] plot ({\x}, {\x/3});
         \draw[thick, domain=-3:-1, smooth, variable=\y, teal] plot ({\y}, {-1});
         \draw[thick, domain=-1:1, smooth, variable=\x, teal] plot ({\x}, {\x});
