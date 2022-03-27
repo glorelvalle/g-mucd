@@ -30,7 +30,7 @@
 \usepackage[many]{tcolorbox}    	% for COLORED BOXES (tikz and xcolor included)
 \usepackage{setspace}               % for LINE SPACING
 \usepackage{multicol}               % for MULTICOLUMNS
-
+\setlength{\parindent}{0pt}
 
 %\setlength\columnsep{0.25in} % setting length of column separator
 \definecolor{main}{HTML}{5989cf}    % setting main color to be used
@@ -113,12 +113,11 @@
 
 But sometimes what we get is that there is an $h$ such that $g(h(y), y) = 0$. Rewrite the Lagrange multiplier analysis in the lecture slides under this assumption.
 \end{boxF}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 For $f,g: \mathbb{R}^2 \to \mathbb{R}$ consider the following minimization problem
 
 \begin{equation*}
-    \min f(x, y) \mbox{ s.t. } g(x, y) = 0
+    \min f(x, y) \mbox{ s.t. } g(x, y) = 0.
 \end{equation*}
 
 Assuming the \textbf{Implicit Function Theorem} holds, we can find a function $x = h(y)$ s.t. $g(h(y), y) = 0$ and, thus, we can write
@@ -131,7 +130,7 @@ At a minimum $y^\ast$ with $x^\ast = h(y^\ast)$ we thus have
 
 \begin{equation}
     \label{eq:eq1}
-    0 = \Psi ' (y^\ast) = \frac{\partial g}{\partial x}(x^\ast, y^\ast) h'(y^\ast) + \frac{\partial g}{\partial y}(x^\ast, y^\ast)
+    0 = \Psi ' (y^\ast) = \frac{\partial g}{\partial x}(x^\ast, y^\ast) h'(y^\ast) + \frac{\partial g}{\partial y}(x^\ast, y^\ast).
 \end{equation}
 
 But since $g(h(y), y) = 0$, we also have
@@ -139,17 +138,19 @@ But since $g(h(y), y) = 0$, we also have
 \begin{equation}
     \label{eq:eq2}
     0 = \frac{\partial g}{\partial x}(x^\ast, y^\ast) h'(y^\ast) + \frac{\partial g}{\partial y}(x^\ast, y^\ast) 
-    \implies h'(y^\ast) = -\frac{\frac{\partial g}{\partial y}(x^\ast, y^\ast)}{\frac{\partial g}{\partial x}(x^\ast, y^\ast)}
+    \implies h'(y^\ast) = -\frac{\frac{\partial g}{\partial y}(x^\ast, y^\ast)}{\frac{\partial g}{\partial x}(x^\ast, y^\ast)}.
 \end{equation}
 
 Putting together \ref{eq:eq1} and \ref{eq:eq2} we arrive at
 \begin{equation*}
-    0 = \frac{\partial f}{\partial y}(x^\ast, y^\ast) \frac{\partial g}{\partial x}(x^\ast, y^\ast) - \frac{\partial f}{\partial x}(x^\ast, y^\ast) \frac{\partial g}{\partial y}(x^\ast, y^\ast) 
+    0 = \frac{\partial f}{\partial y}(x^\ast, y^\ast) \frac{\partial g}{\partial x}(x^\ast, y^\ast) - \frac{\partial f}{\partial x}(x^\ast, y^\ast) \frac{\partial g}{\partial y}(x^\ast, y^\ast) .
 \end{equation*}
 
 That is, at $(x^\ast, y^\ast)$, $\nabla f \perp \left( - \frac{\partial g}{\partial y}, \frac{\partial g}{\partial x}\right) $ and, since 
 $\left( - \frac{\partial g}{\partial y}, \frac{\partial g}{\partial x}\right) \perp \nabla g $, we have $\nabla f \| \nabla g$ i.e.
 $\nabla f(x^\ast, y^\ast) = - \lambda^\ast \nabla g(x^\ast, y^\ast)$ for some $\lambda^\ast \neq 0$.
+
+\vspace{0.5em}
 
 Thus, for the \textbf{Lagrangian}
 
@@ -162,14 +163,13 @@ we have a minimum $(x^\ast, y^\ast)$ there is a $\lambda^\ast \neq 0$ s.t.
 \begin{equation*}
     \nabla \mathcal{L}(x^\ast, y^\ast, \lambda^\ast) = \nabla f(x^\ast, y^\ast) + \lambda^\ast \nabla g(x^\ast, y^\ast) = 0.
 \end{equation*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{boxF}
-\paragraph*{Problem 2.} (3 points) \hspace{0.15em} We want to solve the following constrained minimization problem:
-
-
+\paragraph*{Problem 2.} (3 points) \hspace{0.15em} We want to solve the following constrained minimization problem: 
     \begin{align*}
         \mbox{min   \hspace{0.7em}}  & f(x, y) = x^2 + 2xy + 2y^2 - 3x + y \\
         \mbox{s.t.  \hspace{0.7em}} & x + y = 1, \\
@@ -184,13 +184,11 @@ Argue first that $f$ is convex and then:
     \item Use them to solve the problem. For this consider separately the $(\alpha = \beta = 0), (\alpha > 0, \beta = 0), (\alpha = 0, \beta > 0), (\alpha > 0, \beta > 0)$ cases.
 \end{itemize}
 
+First, we know that $f$ is nor convex because it has two convex inequality constraints, and an affine equality one. Also, there are 
 
 \end{boxF}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-\vspace{1em}
 
 
 
@@ -205,7 +203,7 @@ Argue first that $f$ is convex and then:
                     &= +\infty \mbox{ if } x \notin S.
     \end{align*}
 
-Show that $\tilde f$ is a convex function on $\mathbb{R}^d$. Assume that $a + \infty = \infty $ and that $ a \cdot \infty = 1$ for $a > 0$.
+Show that $\tilde f$ is a convex function on $\mathbb{R}^d$. Assume that $a + \infty = \infty $ and that $ a \cdot \infty = \infty$ for $a > 0$.
 \end{boxF}
 
 We say that $S$ is a \textbf{convex set} if for all $x, x' \in S$ and $\lambda \in [0,1]$,
@@ -214,26 +212,23 @@ We say that $S$ is a \textbf{convex set} if for all $x, x' \in S$ and $\lambda \
     \lambda x + (1 - \lambda) x' \in S.
 \end{equation*}
 
-We know $S \subset \mathbb{R}^d$ is a non empty convex set. Let $x, x' \in S$ and $\lambda \in [0,1]$, so here we cover two cases:
+Let $x, x' \in S$ and $\lambda \in [0,1]$, so here we cover two cases:
 
 \begin{itemize}
-    \item \textit{First case}. If $x \in S$, we have by definition that
-    
+    \item \textit{First case}. If $x, x' \in S$:
     \begin{equation*}
-        \tilde f (\lambda x + (1- \lambda)x') = f (\lambda x + (1- \lambda)x')  \leq \lambda f(x) + (1-\lambda) = \lambda \tilde f(x) + (1-\lambda)
+        \tilde f (\lambda x + (1- \lambda)x') = f (\lambda x + (1- \lambda)x')  \leq \lambda f(x) + (1-\lambda)f(x') = \lambda \tilde f(x) + (1-\lambda)\tilde f(x').
     \end{equation*}
+    Where the first equality holds given that $S$ is convex. The inequality holds because $f$ is convex. And, the last equality raises from the definition of $\tilde f$.
 
-    is convex.
-
-    \item \textit{Second case}. If $x \notin S$, we have that
+    \item \textit{Second case}. If $x \notin S$ or $x' \notin S$, we have that
     \begin{equation*}
-        \lambda \tilde f (x) + (1 - \lambda) \tilde f (x') = + \infty,
+        \tilde f (\lambda x + (1- \lambda)x') \leq \lambda \tilde f (x) + (1 - \lambda) \tilde f (x') = + \infty,
     \end{equation*}
-
-    which we can say it is directly convex, $\tilde f (y) \leq + \infty$, $\forall y$. Note that this also applies to $x'$.
+    because $\tilde f (y) \leq + \infty$, $\forall y \in \mathbb{R}^d$.
 \end{itemize}
 
-Since both cases satisfy convexity, we proof that this function is convex.
+Since both cases satisfy convexity definition holds, we conclude this function is convex.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -252,9 +247,36 @@ Since both cases satisfy convexity, we proof that this function is convex.
 
 \end{boxF}
 
+We proceed using an inductive procedure:
+
+\begin{itemize}
+    \item If $k=1$ then $\lambda = 1$, so we simply have $f(x_1) = f(x_1)$, which is true, and
+    nothing to prove. If $k=2$ we have the definition of the convexity of $f$:
+    \begin{equation*}
+        \lambda_1 + \lambda_2 = 1, \ \lambda_1, \lambda_2 \geq 0 \implies f(\lambda_1 x_1 + \lambda_2 x_2) \leq \lambda_1 f(x_1) + \lambda_2 f(x_2).
+    \end{equation*}
+    \item We assume the statement its true for $k$ and consider $k+1$ points $x_1, \dots, x_{k+1}$, with coefficients $\lambda_1, \dots, \lambda_{k+1} \geq 0$, $\sum_{i=1}^{k+1} \lambda_i = 1$. The evaluation of the linear combination can be decomposed as
+    \begin{equation*}
+        f\left( \sum_{i=1}^{k+1} \lambda_i  x_i \right) = f\left( (1-\lambda_1) \left(\sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1} x_i\right) + \lambda_1 x_1\right).
+    \end{equation*}
+    Using this, it is straightforward to use the Jensen's inequality on $x_1$ and $\sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1} x_i $ with coefficients $\lambda_1$ and $1-\lambda_1$  respectively.  That is,
+
+    \begin{equation*}
+        f\left( \sum_{i=1}^{k+1} \lambda_i  x_i \right) \leq (1 - \lambda_1) f \left( \sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1} x_i \right) + \lambda_1 f(x_1).
+    \end{equation*}
+    We may notice that $\sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1} x_i$ verifies the inductive hypothesis, thus,
+    \begin{equation*}
+        f \left( \sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1} x_i \right) \leq \sum_{i=2}^{k+1} \frac{\lambda_i}{1-\lambda_1} f(x_i).
+    \end{equation*}
+    Finally,
+    \begin{equation*}
+        f\left(\sum_{i=1}^{k+1} \lambda_i x_i \right) \leq (1-\lambda_1) \sum_{i = 2}^{k+1} \frac{\lambda_i}{1-\lambda_1}f(x_i) + \lambda_1 f(x_1) = \sum_{i=1}^{k+1} \lambda_i f(x_i).
+    \end{equation*}
+\end{itemize}
 
 
-\vspace{1em}
+ 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
