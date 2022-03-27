@@ -371,10 +371,10 @@ Now we compute the proximal operator of $f$ as $\mbox{prox}_f = (I + \partial f)
 \[
     (I + \partial f) (x) = 
     \begin{cases}
-        3x, &  x \in (-\infty, -1)\\
-        x & x \in  [-1, 1] \\
-        3x & x \in (1, +\infty) 
-    \end{cases}.
+        3x, &  x \in (-\infty, -1),\\
+        x & x \in  [-1, 1], \\
+        3x & x \in (1, +\infty).
+    \end{cases}
 \]
 
 As a result, we get the inverse operator
@@ -382,12 +382,12 @@ As a result, we get the inverse operator
 \[
     (I + \partial f)^{-1} (x) = 
     \begin{cases}
-        \frac x 3 & x \in  (-\infty, -3] \\
-        -1 & x \in (-3,-1) \\
-        x, &  x \in [-1, 1]\\
-        1 & x \in (1,3) \\
-        \frac x 3 & x \in  [3, \infty) \\
-    \end{cases},
+        \frac x 3 & x \in  (-\infty, -3], \\
+        -1 & x \in (-3,-1), \\
+        x, &  x \in [-1, 1],\\
+        1 & x \in (1,3), \\
+        \frac x 3 & x \in  [3, \infty),
+    \end{cases}
 \]
 
 where the values at $(-3, -1)$ and $(1, 3)$ corresponds to the discontinuities of $(I + \partial f) (x)$. Finally, we ilustrate $(\text{I} + \partial f)^{-1}(x)$ for a better comprehension.\\
