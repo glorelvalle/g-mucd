@@ -401,18 +401,18 @@ which implies that $\mbox{prox}_f (x)= \frac 1 3 x$ for $|x| > 3$. The remaining
     h(-1) = \frac 1 2 (-1 -x)^2 \quad \text{and} \quad h(1) = \frac 1 2 (1-x)^2.  
 \]
 \begin{itemize}
-    \item When $-3 < x < -1$, the function is minimized at $z = -1$, that is, the proximal is $\hbox{prox}_f(x) = -1$.
-    \item When $1 < x < 3$, the function is minimized at $z = 1$, that is, the proximal is $\hbox{prox}_f(x) = 1$.
+    \item When $-3 \leq x < -1$, the function is minimized at $z = -1$, that is, the proximal is $\hbox{prox}_f(x) = -1$.
+    \item When $1 < x \leq 3$, the function is minimized at $z = 1$, that is, the proximal is $\hbox{prox}_f(x) = 1$.
 \end{itemize}
 As a result, the proximal is
 \[
     \mbox{prox}_f (x) = 
     \begin{cases}
-        \frac x 3 & x \in  (-\infty, -3], \\
-        -1 & x \in (-3,-1), \\
+        \frac x 3 & x \in  (-\infty, -3), \\
+        -1 & x \in [-3,-1), \\
         x &  x \in [-1, 1],\\
-        1 & x \in (1,3), \\
-        \frac x 3 & x \in  [3, \infty),
+        1 & x \in (1,3], \\
+        \frac x 3 & x \in  (3, \infty),
     \end{cases}
 \]
 

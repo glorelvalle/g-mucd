@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1648413321 "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.tex" "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.pdf" "main" 1648413323
-  "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.aux" 1648413323 963 72a33905ca7785ba9aeea9ada7ffca57 ""
-  "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.tex" 1648413322 19819 4e66d7fbdbe134214a30ef687c46d565 ""
+["pdflatex"] 1648457149 "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.tex" "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.pdf" "main" 1648457152
+  "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.aux" 1648457151 963 72a33905ca7785ba9aeea9ada7ffca57 ""
+  "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.tex" 1648457148 19825 4cb75910a81dd1858b81e702ed6ba8f8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -226,13 +226,13 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1637704685 2724737 eac25292eabc6f643a4773de8fe50117 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "main.aux" 1648413323 963 72a33905ca7785ba9aeea9ada7ffca57 "pdflatex"
-  "main.out" 1648413322 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1648413322 19819 4e66d7fbdbe134214a30ef687c46d565 ""
+  "main.aux" 1648457151 963 72a33905ca7785ba9aeea9ada7ffca57 "pdflatex"
+  "main.out" 1648457151 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1648457148 19825 4cb75910a81dd1858b81e702ed6ba8f8 ""
   (generated)
-  "main.out"
-  "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.pdf"
-  "main.log"
   "main.aux"
+  "main.log"
+  "main.out"
   "main.pdf"
+  "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.pdf"
   "/Users/glorelvalle/Desktop/Master/g-mucd/optim/exam2/main.log"
